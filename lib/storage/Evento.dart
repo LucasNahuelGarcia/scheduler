@@ -1,9 +1,11 @@
+enum TipoDeEvento {
+  Periodico,
+  UnaVez,
+}
+
 class Evento {
-  final DateTime _dateTime;
-  final String _titulo;
+  DateTime fecha;
+  String titulo;
 
-  Evento(this._dateTime, this._titulo);
-
-  DateTime get fecha => _dateTime;
-  String get titulo => _titulo;
+  Evento({this.fecha, this.titulo});
 }

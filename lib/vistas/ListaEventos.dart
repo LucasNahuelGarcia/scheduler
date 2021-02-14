@@ -8,6 +8,7 @@ class ListaEventos extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
         onPressed: () => {
           Navigator.pushNamed(context, "CrearEvento"),
         },
