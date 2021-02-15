@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:scheduler/src/io/componentesVista/CardEvento.dart';
 import 'package:scheduler/src/storage/Evento.dart';
 import 'package:scheduler/src/storage/storage.dart';
@@ -18,7 +19,12 @@ class ListaEventos extends StatelessWidget {
           SliverAppBar(
             title: Text("Proximos Eventos"),
           ),
-          ProximosEventos(StorageManager.instancia.eventos),
+          ChangeNotifierProvider<StorageManager>(
+            child: Consumer<StorageManager>(
+              builder: (context, model, _) => ProximosEventos(model.eventos),
+            ),
+            create: (BuildContext context) => StorageManager.instancia,
+          ),
         ],
       ),
     );
