@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scheduler/src/componentesVista/BotonFlecha.dart';
+import 'package:scheduler/src/io/componentesVista/BotonFlecha.dart';
 
 class CrearEvento extends StatelessWidget {
   @override
