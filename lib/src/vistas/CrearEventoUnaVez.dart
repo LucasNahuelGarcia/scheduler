@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:scheduler/storage/Evento.dart';
+import 'package:scheduler/src/storage/Evento.dart';
 import 'package:scheduler/storage/storage.dart';
 
 class CrearEventoUnaVez extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scheduler/storage/Evento.dart';
+import 'package:scheduler/src/storage/Evento.dart';
 import 'Fecha.dart';
 
 class CardEvento extends StatelessWidget {

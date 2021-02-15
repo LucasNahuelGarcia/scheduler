@@ -23,5 +23,11 @@ class StorageManager extends ChangeNotifier {
 
   void addEvento(Evento evento) {
     _eventos.add(evento);
+    notifyListeners();
+  }
+
+  void deleteEvento(Evento evento) {
+    _eventos.remove(evento);
+    notifyListeners();
   }
 }
