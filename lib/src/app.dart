@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:scheduler/src/vistas/CrearEventoUnaVez.dart';
-import 'package:scheduler/src/vistas/ListaEventos.dart';
-import 'package:scheduler/src/vistas/CrearEvento.dart';
+import 'package:scheduler/src/io/vistas/CrearEventoUnaVez.dart';
+import 'package:scheduler/src/io/vistas/ListaEventos.dart';
+import 'package:scheduler/src/io/vistas/CrearEvento.dart';
 
 class MyApp extends StatelessWidget {
   @override

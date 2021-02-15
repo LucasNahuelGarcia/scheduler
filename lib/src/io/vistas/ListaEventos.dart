@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:scheduler/src/componentesVista/CardEvento.dart';
+import 'package:scheduler/src/io/componentesVista/CardEvento.dart';
 import 'package:scheduler/src/storage/Evento.dart';
-import 'package:scheduler/storage/storage.dart';
+import 'package:scheduler/src/storage/storage.dart';
 
 class ListaEventos extends StatelessWidget {
   @override

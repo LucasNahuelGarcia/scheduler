@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:scheduler/src/storage/Evento.dart';
-import 'package:scheduler/storage/storage.dart';
+import 'package:scheduler/src/storage/storage.dart';
 
 class CrearEventoUnaVez extends StatelessWidget {
   DateTime _dateTime = DateTime.now();
