@@ -7,13 +7,18 @@ class BotonFlecha extends StatelessWidget {
   BotonFlecha({this.onPressed, this.child});
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
+    return ElevatedButton(
       onPressed: onPressed,
+      style: ButtonStyle(
+        visualDensity: VisualDensity(vertical: VisualDensity.maximumDensity),
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           child,
-          Icon(Icons.arrow_right),
+          Icon(
+            Icons.arrow_right,
+          ),
         ],
       ),
     );

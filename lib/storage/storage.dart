@@ -1,9 +1,27 @@
+import 'package:flutter/material.dart';
+
 import 'Evento.dart';
 
-final List<Evento> _eventos = new List();
+class StorageManager extends ChangeNotifier {
+  static StorageManager _instancia;
 
-List<Evento> get eventos => _eventos;
+  StorageManager._() {
+    if (_instancia == null)
+      _instancia = this;
+    else
+      this.dispose();
+  }
 
-void addEvento(Evento evento) {
-  _eventos.add(evento);
+  static StorageManager get instancia {
+    if (_instancia == null) _instancia = new StorageManager._();
+
+    return _instancia;
+  }
+
+  final List<Evento> _eventos = new List();
+  List<Evento> get eventos => _eventos;
+
+  void addEvento(Evento evento) {
+    _eventos.add(evento);
+  }
 }
