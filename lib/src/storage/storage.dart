@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import 'Evento.dart';
+import 'Evento/Evento.dart';
 
 class StorageManager extends ChangeNotifier {
   static StorageManager _instancia;
@@ -27,7 +26,7 @@ class StorageManager extends ChangeNotifier {
     notifyListeners();
   }
 
-  void deleteEvento(Evento evento) {
+  void removeEvento(Evento evento) {
     _eventos.remove(evento);
     notifyListeners();
   }

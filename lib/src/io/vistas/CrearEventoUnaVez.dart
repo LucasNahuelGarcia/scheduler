@@ -1,11 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:scheduler/src/storage/Evento.dart';
+import 'package:scheduler/src/storage/Evento/Evento.dart';
+import 'package:scheduler/src/storage/Evento/RepeticionEvento.dart';
 import 'package:scheduler/src/storage/storage.dart';
 
-class CrearEventoUnaVez extends StatelessWidget {
+class CrearEventoUnaVez extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _StateCrearEventoUnaVez();
+  }
+}
+
+class _StateCrearEventoUnaVez extends State<CrearEventoUnaVez> {
   DateTime _dateTime = DateTime.now();
   String _titulo = "Evento 1";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +25,16 @@ class CrearEventoUnaVez extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              "Fecha",
+              "Nombre del evento",
+              style: TextStyle(fontSize: 20),
+            ),
+            TextField(
+              onChanged: (s) {
+                _titulo = s;
+              },
+            ),
+            Text(
+              "¿Cuándo ocurre el evento?",
               style: TextStyle(fontSize: 20),
             ),
             CalendarDatePicker(
@@ -28,8 +46,15 @@ class CrearEventoUnaVez extends StatelessWidget {
             ElevatedButton(
               child: Text("Crear"),
               onPressed: () {
-                StorageManager.instancia
-                    .addEvento(Evento(fecha: _dateTime, titulo: _titulo));
+                StorageManager.instancia.addEvento(
+                  Evento(
+                    fecha: _dateTime,
+                    titulo: _titulo,
+                    repeticionEvento: RepeticionEvento(
+                      Duration(seconds: 0),
+                    ),
+                  ),
+                );
                 Navigator.of(context).popUntil((r) => r.isFirst);
               },
             ),
