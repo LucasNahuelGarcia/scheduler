@@ -10,7 +10,7 @@ class Evento {
   DateTime fecha;
   String titulo;
 
-  final RepeticionEvento repeticionEvento;
+  RepeticionEvento repeticionEvento;
 
-  Evento({this.fecha, this.titulo, @required this.repeticionEvento});
+  Evento({this.fecha, this.titulo, this.repeticionEvento});
 }

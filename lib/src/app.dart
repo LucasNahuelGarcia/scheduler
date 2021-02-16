@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scheduler/src/io/vistas/CrearEventoUnaVez.dart';
+import 'package:scheduler/src/io/vistas/FechaEvento.dart';
 import 'package:scheduler/src/io/vistas/ListaEventos.dart';
 import 'package:scheduler/src/io/vistas/CrearEvento.dart';
 
@@ -16,7 +16,6 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         "ListaEventos": (BuildContext context) => ListaEventos(),
         "CrearEvento": (BuildContext context) => CrearEvento(),
-        "CrearEventoUnaVez": (BuildContext context) => CrearEventoUnaVez(),
       },
     );
   }
