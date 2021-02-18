@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:scheduler/src/storage/Evento/RepeticionEvento.dart';
+import 'package:scheduler/src/storage/Evento/EventBehaviour.dart';
 
 enum TipoDeEvento {
   Periodico,
@@ -7,10 +6,9 @@ enum TipoDeEvento {
 }
 
 class Evento {
-  DateTime fecha;
   String titulo;
 
-  RepeticionEvento repeticionEvento;
+  EventBehaviour eventBehaviour;
 
-  Evento({this.fecha, this.titulo, this.repeticionEvento});
+  Evento({this.titulo, this.eventBehaviour});
 }

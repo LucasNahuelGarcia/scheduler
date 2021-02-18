@@ -9,9 +9,10 @@ class Fecha extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Text(
-          "Hoy",
+          _diferenciaDeTiempoDescriptiva(_date),
           style: TextStyle(
             color: Colors.black54,
             fontWeight: FontWeight.bold,
@@ -28,5 +29,28 @@ class Fecha extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  String _diferenciaDeTiempoDescriptiva(DateTime fecha) {
+    String res;
+    int difEnYears = fecha.year - DateTime.now().year;
+    int difEnMeses = fecha.month - DateTime.now().month;
+    int difEnDias = fecha.day - DateTime.now().day;
+
+    if (difEnYears != 0)
+      res = "En $difEnYears años";
+    else if (difEnMeses != 0)
+      res = "En $difEnMeses meses";
+    else if (difEnDias != 0) {
+      if (difEnDias == 1)
+        res = "Mañana";
+      else if (difEnDias == 2)
+        res = "Pasado";
+      else
+        res = "En $difEnDias días";
+    } else
+      res = "Hoy";
+
+    return res;
   }
 }

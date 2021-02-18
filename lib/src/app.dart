@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:scheduler/src/io/vistas/FechaEvento.dart';
 import 'package:scheduler/src/io/vistas/ListaEventos.dart';
 import 'package:scheduler/src/io/vistas/CrearEvento.dart';
 

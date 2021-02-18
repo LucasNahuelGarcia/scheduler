@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scheduler/src/io/componentesVista/CardEvento.dart';
+import 'package:scheduler/src/io/componentesVista/SeparadorConFecha.dart';
 import 'package:scheduler/src/storage/Evento/Evento.dart';
 import 'package:scheduler/src/storage/storage.dart';
 
@@ -38,14 +39,60 @@ class ProximosEventos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<CardEvento> cardsEventos = _getEventosParaMostrar(2);
+
+    cardsEventos.sort(
+      (a, b) => _compareCardEvento(a, b),
+    );
+
+    List<Widget> lista = _agregarFechasAListaDeEventos(cardsEventos);
+    lista.add(Padding(padding: EdgeInsets.symmetric(vertical: 50)));
+
     return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        (context, index) {
-          Evento _evento = _eventos.elementAt(index);
-          return CardEvento(_evento);
-        },
-        childCount: StorageManager.instancia.eventos.length,
+      delegate: SliverChildListDelegate(
+        lista,
       ),
     );
+  }
+
+  int _compareCardEvento(CardEvento a, CardEvento b) {
+    return a.fecha.compareTo(b.fecha);
+  }
+
+  List<CardEvento> _getEventosParaMostrar(int cantDeEventos) {
+    List<CardEvento> eventos = new List();
+    for (Evento e in _eventos) {
+      for (DateTime date in e.eventBehaviour.proximosEventos(cantDeEventos))
+        eventos.add(
+          CardEvento(
+            evento: e,
+            fecha: date,
+          ),
+        );
+    }
+    return eventos;
+  }
+
+  List<Widget> _agregarFechasAListaDeEventos(List<CardEvento> cardsEventos) {
+    List<Widget> eventosConFechas = new List();
+    DateTime last;
+    for (int i = 0; i < cardsEventos.length; i++) {
+      if (last == null || !_mismoDia(cardsEventos[i].fecha, last)) {
+        eventosConFechas.add(
+          SeparadorConFecha(
+            fecha: cardsEventos[i].fecha,
+          ),
+        );
+        last = cardsEventos[i].fecha;
+      }
+
+      eventosConFechas.add(cardsEventos[i]);
+    }
+
+    return eventosConFechas;
+  }
+
+  bool _mismoDia(DateTime a, DateTime b) {
+    return a.day == b.day && a.month == b.month && a.year == b.year;
   }
 }

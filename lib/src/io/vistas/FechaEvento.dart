@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:scheduler/src/io/componentesVista/SelectorFechaCompacto.dart';
 import 'package:scheduler/src/storage/Evento/Evento.dart';
+import 'package:scheduler/src/storage/Evento/EventoFechaUnica.dart';
 
 class FechaEvento extends StatelessWidget {
   final Evento _nuevoEvento;
@@ -9,7 +10,7 @@ class FechaEvento extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _nuevoEvento.fecha = DateTime.now();
+    _nuevoEvento.eventBehaviour = EventoFechaUnica(fecha: DateTime.now());
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.of(context).pop(_nuevoEvento),
@@ -32,10 +33,45 @@ class FechaEvento extends StatelessWidget {
               ),
               title: SelectorFechaCompacto(
                 onDateChanged: (date) {
-                  _nuevoEvento.fecha = date;
+                  _nuevoEvento.eventBehaviour = EventoFechaUnica(fecha: date);
                 },
               ),
             ),
+            Card(
+              child: Column(
+                children: [
+                  ButtonBar(
+                    alignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      FlatButton(
+                        onPressed: () {},
+                        child: Text("Dias"),
+                      ),
+                      FlatButton(
+                        onPressed: () {},
+                        child: Text("Meses"),
+                      ),
+                      FlatButton(
+                        onPressed: () {},
+                        child: Text("Años"),
+                      ),
+                    ],
+                  ),
+                  Divider(),
+                  SizedBox(
+                    height: 220,
+                    child: PageView(
+                      allowImplicitScrolling: false,
+                      children: [
+                        Text("Periodo en dias"),
+                        Text("Periodo en Meses"),
+                        Text("Periodo en Años"),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),

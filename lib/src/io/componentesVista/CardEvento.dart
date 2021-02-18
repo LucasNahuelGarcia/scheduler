@@ -3,9 +3,10 @@ import 'package:scheduler/src/storage/Evento/Evento.dart';
 import 'Fecha.dart';
 
 class CardEvento extends StatelessWidget {
-  final Evento _evento;
+  final Evento evento;
+  final DateTime fecha;
 
-  CardEvento(this._evento);
+  CardEvento({@required this.evento, @required this.fecha});
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +16,11 @@ class CardEvento extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Fecha(_evento.fecha),
+            Icon(Icons.access_alarm),
             Column(
               children: [
                 Text(
-                  _evento.titulo,
+                  evento.titulo,
                   style: TextStyle(
                     color: Colors.black54,
                     fontWeight: FontWeight.bold,
