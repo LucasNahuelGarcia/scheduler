@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scheduler/src/io/TemaEventos/TemaEventos.dart';
 import 'package:scheduler/src/io/vistas/ListaEventos.dart';
-import 'package:scheduler/src/io/vistas/NombreEvento.dart';
+import 'package:scheduler/src/io/vistas/CrearEvento/NombreEvento.dart';
 import 'package:scheduler/src/storage/storage.dart';
 
 class MyApp extends StatelessWidget {
