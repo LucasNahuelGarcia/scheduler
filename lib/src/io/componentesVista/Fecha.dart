@@ -13,19 +13,11 @@ class Fecha extends StatelessWidget {
       children: [
         Text(
           _diferenciaDeTiempoDescriptiva(_date),
-          style: TextStyle(
-            color: Colors.black54,
-            fontWeight: FontWeight.bold,
-            fontSize: 24,
-          ),
+          style: Theme.of(context).textTheme.headline6,
         ),
         Text(
           "${_date.day}/${_date.month}",
-          style: TextStyle(
-            color: Colors.black54,
-            fontWeight: FontWeight.bold,
-            fontSize: 15,
-          ),
+          style: Theme.of(context).textTheme.subtitle1,
         ),
       ],
     );

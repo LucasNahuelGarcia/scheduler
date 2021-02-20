@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:scheduler/src/storage/Evento/EventBehaviour.dart';
 
 enum TipoDeEvento {
@@ -6,9 +7,14 @@ enum TipoDeEvento {
 }
 
 class Evento {
-  String titulo;
+  String titulo = "evento sin titulo";
+  int importancia = 0;
 
   EventBehaviour eventBehaviour;
 
-  Evento({this.titulo, this.eventBehaviour});
+  Evento({
+    @required this.titulo,
+    @required this.eventBehaviour,
+    @required this.importancia,
+  });
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:scheduler/src/io/TemaEventos/TemaEventos.dart';
 import 'package:scheduler/src/storage/Evento/Evento.dart';
-import 'Fecha.dart';
 
 class CardEvento extends StatelessWidget {
   final Evento evento;
@@ -11,25 +12,25 @@ class CardEvento extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Icon(Icons.access_alarm),
-            Column(
-              children: [
-                Text(
-                  evento.titulo,
-                  style: TextStyle(
-                    color: Colors.black54,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24,
-                  ),
-                ),
-              ],
-            ),
-          ],
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Provider.of<TemaEventos>(context).colores[evento.importancia],
+              Provider.of<TemaEventos>(context).colores[evento.importancia],
+            ],
+          ),
+        ),
+        child: ListTile(
+          leading: Text(
+            "${fecha.hour ~/ 10}${fecha.hour % 10}:${fecha.minute ~/ 10}${fecha.minute % 10}",
+            style: TextStyle(fontSize: 25),
+          ),
+          title: Text(
+            evento.titulo,
+            style: TextStyle(fontSize: 25),
+          ),
         ),
       ),
     );

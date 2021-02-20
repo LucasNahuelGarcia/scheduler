@@ -10,9 +10,12 @@ class SeparadorConFecha extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: Fecha(fecha),
-      title: Divider(),
+    return Column(
+      children: [
+        ListTile(
+          leading: Fecha(fecha),
+        ),
+      ],
     );
   }
 }

@@ -1,39 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:scheduler/src/io/TemaEventos/TemaEventos.dart';
 import 'package:scheduler/src/io/vistas/FechaEvento.dart';
 import 'package:scheduler/src/storage/Evento/Evento.dart';
 import 'package:scheduler/src/storage/storage.dart';
 
 class CrearEvento extends StatelessWidget {
   final _globalKey = new GlobalKey<FormState>();
-  final _evento = new Evento();
+  final _evento = new Evento(titulo: "", eventBehaviour: null, importancia: 0);
+
+  void submitForm(BuildContext context) {
+    if (_globalKey.currentState.validate()) {
+      _globalKey.currentState.save();
+      Navigator.of(context)
+          .push(
+        MaterialPageRoute(
+          builder: (context) => FechaEvento(_evento),
+        ),
+      )
+          .then(
+        (value) {
+          if (value != null) {
+            Provider.of<StorageManager>(context, listen: false)
+                .addEvento(_evento);
+            Navigator.of(context).pop();
+          }
+        },
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     FocusNode focusNode = FocusNode();
 
-    void submitForm() {
-      if (_globalKey.currentState.validate()) {
-        _globalKey.currentState.save();
-        Navigator.of(context)
-            .push(
-          MaterialPageRoute(
-            builder: (context) => FechaEvento(_evento),
-          ),
-        )
-            .then(
-          (value) {
-            if (value != null) {
-              StorageManager.instancia.addEvento(_evento);
-              Navigator.of(context).pop();
-            }
-          },
-        );
-      }
-    }
-
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () => submitForm(),
+        onPressed: () => submitForm(context),
         child: Icon(Icons.navigate_next),
       ),
       appBar: AppBar(
@@ -72,20 +75,16 @@ class CrearEvento extends StatelessWidget {
               ),
             ),
             Divider(),
-            ListTile(
-              title: Text(
-                "Importancia",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: Colors.black54,
+            Card(
+              child: ListTile(
+                title: Text(
+                  "Importancia",
+                ),
+                subtitle: SelectorImportanciaEvento(
+                  colores: Provider.of<TemaEventos>(context).colores,
+                  onChanged: (val) => _evento.importancia = val,
                 ),
               ),
-            ),
-            SelectorImportanciaEvento(
-              cantiadElementos: 2,
-              colorCalmado: Colors.greenAccent,
-              colorUrgente: Colors.redAccent,
             ),
           ],
         ),
@@ -94,40 +93,49 @@ class CrearEvento extends StatelessWidget {
   }
 }
 
-class SelectorImportanciaEvento extends StatelessWidget {
-  final int cantiadElementos;
-  final Color colorCalmado;
-  final Color colorUrgente;
-  SelectorImportanciaEvento(
-      {this.cantiadElementos, this.colorCalmado, this.colorUrgente});
+class SelectorImportanciaEvento extends StatefulWidget {
+  final List<Color> colores;
+  final Function(int val) onChanged;
 
-  List<Widget> _crearElementos() {
-    List<Widget> elementos = List<Widget>();
-
-    for (int i = 0; i < cantiadElementos; i++) {
-      elementos.add(
-        Icon(
-          Icons.emoji_emotions,
-          size: 35,
-          color: Color.lerp(
-            colorCalmado,
-            colorUrgente,
-            i / (cantiadElementos - 1),
-          ),
-        ),
-      );
-
-      print(cantiadElementos / (i + 1));
-    }
-
-    return elementos;
-  }
+  SelectorImportanciaEvento({
+    @required this.colores,
+    @required this.onChanged,
+  });
 
   @override
+  State<StatefulWidget> createState() {
+    return StateSelectorImportanciaEvento(
+      colores: colores,
+      onChanged: onChanged,
+    );
+  }
+}
+
+class StateSelectorImportanciaEvento extends State<SelectorImportanciaEvento> {
+  final List<Color> colores;
+  final Function(int val) onChanged;
+
+  StateSelectorImportanciaEvento({
+    @required this.colores,
+    @required this.onChanged,
+  });
+
+  double _value = 0;
+  @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: _crearElementos(),
+    return Slider(
+      label: "Importancia",
+      activeColor: colores[_value.toInt()],
+      value: _value.toDouble(),
+      divisions: colores.length - 1,
+      onChanged: (v) {
+        setState(() {
+          _value = v;
+        });
+        onChanged(v.toInt());
+      },
+      min: 0,
+      max: colores.length.toDouble() - 1,
     );
   }
 }

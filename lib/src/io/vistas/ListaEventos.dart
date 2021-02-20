@@ -20,11 +20,8 @@ class ListaEventos extends StatelessWidget {
           SliverAppBar(
             title: Text("Proximos Eventos"),
           ),
-          ChangeNotifierProvider<StorageManager>(
-            child: Consumer<StorageManager>(
-              builder: (context, model, _) => ProximosEventos(model.eventos),
-            ),
-            create: (BuildContext context) => StorageManager.instancia,
+          Consumer<StorageManager>(
+            builder: (context, model, _) => ProximosEventos(model.eventos),
           ),
         ],
       ),
