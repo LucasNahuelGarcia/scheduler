@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class TemaEventos {
   final List<Color> colores = [
-    Color(0xff6b9b37),
-    Color(0xffc9bc1f),
-    Color(0xffb61827),
+    Color(0x550000ff),
+    Color(0x5500ff00),
+    Color(0x55ffff00),
+    Color(0x55ff0000),
   ];
 }

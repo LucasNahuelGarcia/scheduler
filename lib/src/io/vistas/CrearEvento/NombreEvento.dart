@@ -14,11 +14,30 @@ class NombreEvento extends StatelessWidget {
     if (_globalKey.currentState.validate()) {
       _globalKey.currentState.save();
       Navigator.of(context)
-          .push(
-        MaterialPageRoute(
-          builder: (context) => FechaEvento(_evento),
-        ),
-      )
+          .push(PageRouteBuilder(
+              transitionDuration: Duration(seconds: 5),
+              transitionsBuilder: (context, anim, secondAnim, child) {
+                var begin = Offset(1.0, 0.0);
+                var end = Offset.zero;
+                var curve = Curves.easeIn;
+                var tween = Tween(begin: begin, end: end)
+                    .chain(CurveTween(curve: curve));
+
+                return Stack(
+                  children: [
+                    SlideTransition(
+                      position: secondAnim.drive(tween),
+                      child: child,
+                    ),
+                    SlideTransition(
+                      position: anim.drive(tween),
+                      child: child,
+                    ),
+                  ],
+                );
+              },
+              pageBuilder: (context, animation, secondaryAnimation) =>
+                  FechaEvento(_evento)))
           .then(
         (value) {
           if (value != null) {

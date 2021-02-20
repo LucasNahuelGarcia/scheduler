@@ -14,6 +14,7 @@ class CardEvento extends StatelessWidget {
     return Card(
       clipBehavior: Clip.antiAliasWithSaveLayer,
       child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 13, vertical: 10),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
@@ -22,15 +23,20 @@ class CardEvento extends StatelessWidget {
             ],
           ),
         ),
-        child: ListTile(
-          leading: Text(
-            "${fecha.hour ~/ 10}${fecha.hour % 10}:${fecha.minute ~/ 10}${fecha.minute % 10}",
-            style: TextStyle(fontSize: 25),
-          ),
-          title: Text(
-            evento.titulo,
-            style: TextStyle(fontSize: 25),
-          ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              "${fecha.hour ~/ 10}${fecha.hour % 10}:${fecha.minute ~/ 10}${fecha.minute % 10}",
+              style: TextStyle(fontSize: 25),
+            ),
+            Padding(padding: EdgeInsets.only(left: 20)),
+            Text(
+              evento.titulo,
+              style: TextStyle(fontSize: 25),
+            ),
+          ],
         ),
       ),
     );
