@@ -7,8 +7,9 @@ enum TipoDeEvento {
 }
 
 class Evento {
-  String titulo = "evento sin titulo";
-  int importancia = 0;
+  String titulo;
+  int importancia;
+  List<String> notas;
 
   EventBehaviour eventBehaviour;
 
@@ -16,5 +17,6 @@ class Evento {
     @required this.titulo,
     @required this.eventBehaviour,
     @required this.importancia,
+    this.notas,
   });
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scheduler/src/io/TemaEventos/TemaEventos.dart';
 import 'package:scheduler/src/io/vistas/ListaEventos.dart';
-import 'package:scheduler/src/io/vistas/CrearEvento.dart';
+import 'package:scheduler/src/io/vistas/NombreEvento.dart';
 import 'package:scheduler/src/storage/storage.dart';
 
 class MyApp extends StatelessWidget {
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         home: ListaEventos(),
         routes: <String, WidgetBuilder>{
           "ListaEventos": (BuildContext context) => ListaEventos(),
-          "CrearEvento": (BuildContext context) => CrearEvento(),
+          "CrearEvento": (BuildContext context) => NombreEvento(),
         },
       ),
     );

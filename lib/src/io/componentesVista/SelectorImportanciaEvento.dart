@@ -30,22 +30,18 @@ class StateSelectorImportanciaEvento extends State<SelectorImportanciaEvento> {
   double _value = 0;
   @override
   Widget build(BuildContext context) {
-    return SliderTheme(
-      data: SliderThemeData(),
-      child: Slider(
-        label: "Importancia",
-        activeColor: colores[_value.toInt()],
-        value: _value.toDouble(),
-        divisions: colores.length - 1,
-        onChanged: (v) {
-          setState(() {
-            _value = v;
-          });
-          onChanged(v.toInt());
-        },
-        min: 0,
-        max: colores.length.toDouble() - 1,
-      ),
+    return Slider(
+      activeColor: colores[_value.toInt()],
+      value: _value.toDouble(),
+      divisions: colores.length - 1,
+      onChanged: (v) {
+        setState(() {
+          _value = v;
+        });
+        onChanged(v.toInt());
+      },
+      min: 0,
+      max: colores.length.toDouble() - 1,
     );
   }
 }

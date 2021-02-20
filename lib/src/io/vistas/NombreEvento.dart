@@ -6,7 +6,7 @@ import 'package:scheduler/src/io/vistas/FechaEvento.dart';
 import 'package:scheduler/src/storage/Evento/Evento.dart';
 import 'package:scheduler/src/storage/storage.dart';
 
-class CrearEvento extends StatelessWidget {
+class NombreEvento extends StatelessWidget {
   final _globalKey = new GlobalKey<FormState>();
   final _evento = new Evento(titulo: "", eventBehaviour: null, importancia: 0);
 
@@ -33,11 +33,11 @@ class CrearEvento extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FocusNode focusNode = FocusNode();
-
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () => submitForm(context),
+        onPressed: () {
+          submitForm(context);
+        },
         child: Icon(Icons.navigate_next),
       ),
       appBar: AppBar(
@@ -50,10 +50,9 @@ class CrearEvento extends StatelessWidget {
             ListTile(
               title: TextFormField(
                 autofocus: true,
-                onFieldSubmitted: (s) => focusNode.requestFocus(),
                 keyboardType: TextInputType.name,
                 decoration: InputDecoration(hintText: "Nombre del evento"),
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.headline4,
                 textCapitalization: TextCapitalization.sentences,
                 validator: (s) {
                   String res;
@@ -71,19 +70,24 @@ class CrearEvento extends StatelessWidget {
                 onPressed: () {},
               ),
               title: TextFormField(
-                focusNode: focusNode,
                 decoration: InputDecoration(hintText: "Notas"),
               ),
             ),
             Divider(),
             Card(
               child: ListTile(
-                title: Text(
-                  "Importancia",
-                ),
-                subtitle: SelectorImportanciaEvento(
-                  colores: Provider.of<TemaEventos>(context).colores,
-                  onChanged: (val) => _evento.importancia = val,
+                title: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      "Importancia",
+                      style: Theme.of(context).textTheme.subtitle1,
+                    ),
+                    SelectorImportanciaEvento(
+                      colores: Provider.of<TemaEventos>(context).colores,
+                      onChanged: (val) => _evento.importancia = val,
+                    ),
+                  ],
                 ),
               ),
             ),
