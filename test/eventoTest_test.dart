@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:scheduler/src/app.dart';
 import 'package:scheduler/src/storage/Evento/DistanciaTiempo.dart';
 import 'package:scheduler/src/storage/Evento/Evento.dart';
 
