@@ -16,6 +16,7 @@ class Evento {
     this.notas,
   });
 
+  /// Devuelve a lo sumo las proximas n repeticiones del evento.
   List<DateTime> proximosEventos(int cant) {
     List<DateTime> res = new List();
     DateTime proxFecha = fecha;

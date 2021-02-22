@@ -30,21 +30,55 @@ void main() {
     expect(i, cantRepeticonesTest);
   });
   test("Fecha con repeticion en meses.", () {
-      final int cantRepeticonesTest = 300;
-      DateTime testTime = DateTime(214, 2, 21, 12, 29, 21);
-      DistanciaTiempo repeticionTest = DistanciaTiempo(meses: 1);
-      Evento e = Evento(
-        fecha: testTime,
-        repeticion: repeticionTest,
-        importancia: 0,
-        titulo: "EventoPrueba",
-      );
-      int i = 0;
-      for (DateTime fecha in e.proximosEventos(cantRepeticonesTest)) {
-        expect(fecha.month, ( testTime.month-1 + i ) % 12 + 1);
-        i++;
-      }
+    final int cantRepeticonesTest = 300;
+    DateTime testTime = DateTime(214, 2, 21, 12, 29, 21);
+    DistanciaTiempo repeticionTest = DistanciaTiempo(meses: 1);
+    Evento e = Evento(
+      fecha: testTime,
+      repeticion: repeticionTest,
+      importancia: 0,
+      titulo: "EventoPrueba",
+    );
+    int i = 0;
+    for (DateTime fecha in e.proximosEventos(cantRepeticonesTest)) {
+      expect(fecha.month, (testTime.month - 1 + i) % 12 + 1);
+      i++;
+    }
 
-      expect(i, cantRepeticonesTest);
+    expect(i, cantRepeticonesTest);
+  });
+  test("Fecha con repeticion en horas.", () {
+    final int cantRepeticonesTest = 300;
+    DateTime testTime = DateTime(214, 2, 21, 12, 29, 21);
+    DistanciaTiempo repeticionTest = DistanciaTiempo(meses: 1);
+    Evento e = Evento(
+      fecha: testTime,
+      repeticion: repeticionTest,
+      importancia: 0,
+      titulo: "EventoPrueba",
+    );
+    int i = 0;
+    for (DateTime fecha in e.proximosEventos(cantRepeticonesTest)) {
+      expect(fecha.month, (testTime.month - 1 + i) % 12 + 1);
+      i++;
+    }
+
+    expect(i, cantRepeticonesTest);
+  });
+  test("Evento sin repeticion.", () {
+    final int cantRepeticonesTest = 300;
+    DateTime testTime = DateTime(214, 2, 21, 12, 29, 21);
+    Evento e = Evento(
+      fecha: testTime,
+      importancia: 0,
+      titulo: "EventoPrueba",
+    );
+    int i = 0;
+    for (DateTime fecha in e.proximosEventos(cantRepeticonesTest)) {
+      expect(fecha.month, testTime.month);
+      i++;
+    }
+
+    expect(i, 1);
   });
 }
