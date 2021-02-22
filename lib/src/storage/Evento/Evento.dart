@@ -1,22 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:scheduler/src/storage/Evento/EventBehaviour.dart';
-
-enum TipoDeEvento {
-  Periodico,
-  UnaVez,
-}
+import 'package:scheduler/src/storage/Evento/DistanciaTiempo.dart';
 
 class Evento {
   String titulo;
   int importancia;
   List<String> notas;
-
-  EventBehaviour eventBehaviour;
+  DateTime fecha;
+  DistanciaTiempo repeticion;
 
   Evento({
     @required this.titulo,
-    @required this.eventBehaviour,
+    @required this.fecha,
     @required this.importancia,
+    this.repeticion,
     this.notas,
   });
+
+  List<DateTime> proximosEventos(int cant) {
+    List<DateTime> res = new List();
+    DateTime proxFecha = fecha;
+
+    if (repeticion != null) {
+      while (fecha.compareTo(DateTime.now()) < 0)
+        fecha = repeticion.addTo(fecha);
+
+      for (int i = 0; i < cant; i++) {
+        res.add(proxFecha);
+        proxFecha = repeticion.addTo(proxFecha);
+      }
+    } else {
+      res.add(proxFecha);
+    }
+
+    return res;
+  }
 }

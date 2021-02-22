@@ -36,7 +36,7 @@ class ProximosEventos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<CardEvento> cardsEventos = _getEventosParaMostrar(2);
+    List<CardEvento> cardsEventos = _getEventosParaMostrar(3);
 
     cardsEventos.sort(
       (a, b) => _compareCardEvento(a, b),
@@ -59,13 +59,16 @@ class ProximosEventos extends StatelessWidget {
   List<CardEvento> _getEventosParaMostrar(int cantDeEventos) {
     List<CardEvento> eventos = new List();
     for (Evento e in _eventos) {
-      for (DateTime date in e.eventBehaviour.proximosEventos(cantDeEventos))
+      for (DateTime date in e.proximosEventos(cantDeEventos)){
         eventos.add(
           CardEvento(
             evento: e,
             fecha: date,
           ),
         );
+        
+        print("${e.titulo}-Date: $date");
+      }
     }
     return eventos;
   }
