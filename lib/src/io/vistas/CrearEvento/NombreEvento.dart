@@ -4,13 +4,13 @@ import 'package:scheduler/src/io/TemaEventos/TemaEventos.dart';
 import 'package:scheduler/src/io/componentesVista/SelectorImportanciaEvento.dart';
 import 'package:scheduler/src/io/vistas/CrearEvento/FechaEvento.dart';
 import 'package:scheduler/src/storage/Evento/Evento.dart';
-import 'package:scheduler/src/storage/storage.dart';
+import 'package:scheduler/src/storage/StorageManager.dart';
 
 class NombreEvento extends StatelessWidget {
   final _globalKey = new GlobalKey<FormState>();
   final _evento = new Evento(
     titulo: "",
-    fecha: DateTime.now(),
+    fechas: [],
     importancia: 0,
   );
 
@@ -20,12 +20,13 @@ class NombreEvento extends StatelessWidget {
       Navigator.of(context)
           .push(
         MaterialPageRoute(
-          builder: (context) => FechaEvento(_evento),
+          builder: (context) => FechaEvento(),
         ),
       )
           .then(
         (value) {
           if (value != null) {
+            _evento.fechas = [value];
             Provider.of<StorageManager>(context, listen: false)
                 .addEvento(_evento);
             Navigator.of(context).pop();

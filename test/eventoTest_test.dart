@@ -5,7 +5,7 @@ import 'package:scheduler/src/storage/Evento/Evento.dart';
 void main() {
   test("Asignar fecha al evento.", () {
     DateTime testTime = DateTime(214, 2, 21, 12, 29, 21);
-    Evento e = Evento(fecha: testTime, importancia: 0, titulo: "EventoPrueba");
+    Evento e = Evento(fechas:[testTime], importancia: 0, titulo: "EventoPrueba");
     expect(e.fecha, testTime);
   });
 
@@ -14,7 +14,7 @@ void main() {
     DateTime testTime = DateTime(214, 2, 21, 12, 29, 21);
     DistanciaTiempo repeticionTest = DistanciaTiempo(dias: 1);
     Evento e = Evento(
-      fecha: testTime,
+      fechas:[ testTime],
       repeticion: repeticionTest,
       importancia: 0,
       titulo: "EventoPrueba",
@@ -32,7 +32,7 @@ void main() {
     DateTime testTime = DateTime(214, 2, 21, 12, 29, 21);
     DistanciaTiempo repeticionTest = DistanciaTiempo(meses: 1);
     Evento e = Evento(
-      fecha: testTime,
+      fechas:[ testTime],
       repeticion: repeticionTest,
       importancia: 0,
       titulo: "EventoPrueba",
@@ -50,7 +50,7 @@ void main() {
     DateTime testTime = DateTime(214, 2, 21, 12, 29, 21);
     DistanciaTiempo repeticionTest = DistanciaTiempo(meses: 1);
     Evento e = Evento(
-      fecha: testTime,
+      fechas:[ testTime],
       repeticion: repeticionTest,
       importancia: 0,
       titulo: "EventoPrueba",
@@ -67,7 +67,7 @@ void main() {
     final int cantRepeticonesTest = 300;
     DateTime testTime = DateTime(214, 2, 21, 12, 29, 21);
     Evento e = Evento(
-      fecha: testTime,
+      fechas:[ testTime],
       importancia: 0,
       titulo: "EventoPrueba",
     );

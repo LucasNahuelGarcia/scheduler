@@ -3,7 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:scheduler/src/io/TemaEventos/TemaEventos.dart';
 import 'package:scheduler/src/io/vistas/ListaEventos.dart';
 import 'package:scheduler/src/io/vistas/CrearEvento/NombreEvento.dart';
-import 'package:scheduler/src/storage/storage.dart';
+import 'package:scheduler/src/storage/SQL_StorageManager.dart';
+import 'package:scheduler/src/storage/StorageManager.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<StorageManager>(
-          create: (context) => StorageManager(),
+          create: (context) => SQLStorageManager(),
         ),
         Provider(
           create: (context) => TemaEventos(),

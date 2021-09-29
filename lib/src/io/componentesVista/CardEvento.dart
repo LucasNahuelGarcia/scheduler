@@ -28,7 +28,9 @@ class CardEvento extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "${fecha.hour ~/ 10}${fecha.hour % 10}:${fecha.minute ~/ 10}${fecha.minute % 10}",
+              fecha == null
+                  ? ""
+                  : "${fecha.hour ~/ 10}${fecha.hour % 10}:${fecha.minute ~/ 10}${fecha.minute % 10}",
               style: TextStyle(fontSize: 25),
             ),
             Padding(padding: EdgeInsets.only(left: 20)),

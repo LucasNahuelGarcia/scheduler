@@ -5,14 +5,12 @@ import 'package:scheduler/src/io/componentesVista/SelectorTiempoRepeticion.dart'
 import 'package:scheduler/src/storage/Evento/Evento.dart';
 
 class FechaEvento extends StatelessWidget {
-  final Evento _nuevoEvento;
-  FechaEvento(this._nuevoEvento);
-
   @override
   Widget build(BuildContext context) {
+    DateTime _fecha = DateTime.now();
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.of(context).pop(_nuevoEvento),
+        onPressed: () => Navigator.of(context).pop(_fecha),
         child: Icon(Icons.add),
       ),
       appBar: AppBar(
@@ -28,7 +26,7 @@ class FechaEvento extends StatelessWidget {
               ),
               title: SelectorFechaCompacto(
                 onDateChanged: (date) {
-                  _nuevoEvento.fecha = date;
+                  _fecha = date;
                 },
               ),
             ),
@@ -41,7 +39,7 @@ class FechaEvento extends StatelessWidget {
                   ),
                   SelectorTiempoRepeticion(
                     onChange: (val) {
-                      _nuevoEvento.repeticion = val;
+                      //_nuevoEvento.repeticion = val;
                     },
                   ),
                 ],

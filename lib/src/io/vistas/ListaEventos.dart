@@ -3,7 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:scheduler/src/io/componentesVista/CardEvento.dart';
 import 'package:scheduler/src/io/componentesVista/SeparadorConFecha.dart';
 import 'package:scheduler/src/storage/Evento/Evento.dart';
-import 'package:scheduler/src/storage/storage.dart';
+import 'package:scheduler/src/storage/Notificaciones/notificationHelper.dart';
+import 'package:scheduler/src/storage/StorageManager.dart';
 
 class ListaEventos extends StatelessWidget {
   @override
@@ -11,8 +12,8 @@ class ListaEventos extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () => {
-          Navigator.pushNamed(context, "CrearEvento"),
+        onPressed: () {
+          Navigator.pushNamed(context, "CrearEvento");
         },
       ),
       body: CustomScrollView(
@@ -21,7 +22,27 @@ class ListaEventos extends StatelessWidget {
             title: Text("Proximos Eventos"),
           ),
           Consumer<StorageManager>(
-            builder: (context, model, _) => ProximosEventos(model.eventos),
+            builder: (context, model, _) => FutureBuilder<List<Evento>>(
+              future: model.eventos,
+              builder:
+                  (BuildContext context, AsyncSnapshot<List<Evento>> snapshot) {
+                Widget res = SliverFillRemaining(
+                  child: CircularProgressIndicator(),
+                );
+                if (snapshot.hasData) {
+                  if (snapshot.data.isNotEmpty)
+                    res = ProximosEventos(snapshot.data);
+                  else
+                    res = SliverFillRemaining(
+                      child: Text("No hay datos che."),
+                    );
+                } else if (snapshot.hasError)
+                  res = SliverFillRemaining(
+                    child: Text("No hay datos che."),
+                  );
+                return res;
+              },
+            ),
           ),
         ],
       ),
@@ -53,20 +74,22 @@ class ProximosEventos extends StatelessWidget {
   }
 
   int _compareCardEvento(CardEvento a, CardEvento b) {
-    return a.fecha.compareTo(b.fecha);
+    DateTime adt = a.fecha ?? DateTime(0);
+    DateTime bdt = b.fecha ?? DateTime(0);
+    return adt.compareTo(bdt);
   }
 
   List<CardEvento> _getEventosParaMostrar(int cantDeEventos) {
     List<CardEvento> eventos = new List();
     for (Evento e in _eventos) {
-      for (DateTime date in e.proximosEventos(cantDeEventos)){
+      for (DateTime date in (e.fechas)) {
         eventos.add(
           CardEvento(
             evento: e,
             fecha: date,
           ),
         );
-        
+
         print("${e.titulo}-Date: $date");
       }
     }
