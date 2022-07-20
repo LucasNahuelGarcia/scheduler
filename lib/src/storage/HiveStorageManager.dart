@@ -1,8 +1,7 @@
 import 'package:scheduler/src/storage/Evento/Evento.dart';
-
 import 'dart:ui';
-
 import 'StorageManager.dart';
+import 'package:hive/hive.dart';
 
 class HiveStorageManager implements StorageManager {
   @override
